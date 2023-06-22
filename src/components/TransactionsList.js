@@ -24,7 +24,7 @@ function TransactionsList({transactions,searchText}) {
         </tr>
         {
         transactions
-        .filter((transaction => transaction.description.includes(searchText) || searchText === '') ) //(transaction =>  { return searchText.length > 0 ? transaction.description === searchText : true} )
+        .filter((transaction => transaction.description.toLowerCase().startsWith(searchText.toLowerCase())) ) //(transaction =>  { return searchText.length > 0 ? transaction.description === searchText : true} )
         .map(transaction => <Transaction key={transaction.id} date={transaction.date} description={transaction.description} category={transaction.category} amount={transaction.amount}/>)}
       </tbody>
     </table>
