@@ -1,7 +1,10 @@
 import React from "react";
 import Transaction from "./Transaction";
 
-function TransactionsList() {
+function TransactionsList({transactions,searchText}) {
+  if (!transactions){
+    return null;
+  }
   return (
     <table className="ui celled striped padded table">
       <tbody>
@@ -19,7 +22,10 @@ function TransactionsList() {
             <h3 className="ui center aligned header">Amount</h3>
           </th>
         </tr>
-        {/* render a list of <Transaction> components here */}
+        {
+        transactions
+        .filter((transaction => transaction.description.includes(searchText) || searchText === '') ) //(transaction =>  { return searchText.length > 0 ? transaction.description === searchText : true} )
+        .map(transaction => <Transaction key={transaction.id} date={transaction.date} description={transaction.description} category={transaction.category} amount={transaction.amount}/>)}
       </tbody>
     </table>
   );

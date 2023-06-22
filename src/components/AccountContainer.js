@@ -1,14 +1,21 @@
-import React from "react";
+import React,{useState} from "react";
 import TransactionsList from "./TransactionsList";
 import Search from "./Search";
 import AddTransactionForm from "./AddTransactionForm";
 
-function AccountContainer() {
+
+function AccountContainer({transactions}) {
+  const [searchText, setSearchText]=useState("")
+  
+  function onChange(e){
+    setSearchText(e.target.value)
+   
+  }
   return (
     <div>
-      <Search />
+      <Search onChange={onChange}/>
       <AddTransactionForm />
-      <TransactionsList />
+      <TransactionsList searchText={searchText} transactions={transactions} />
     </div>
   );
 }
